@@ -1,0 +1,1 @@
+API of SmartOffice protocol
