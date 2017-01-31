@@ -5,7 +5,7 @@ HOST: http://polls.apiblueprint.org/
 
 SmartOffice API to interact with embedded devices.
 
-## Access Request [/api/v2/node/access]
+## Access Request [/api/v1/node/access]
 
 ### Request Access By UID For Node [GET]
 
@@ -30,6 +30,12 @@ SmartOffice API to interact with embedded devices.
             time: %time%
             uid: %uid%
             pcd_number: %pcd_number%
+            access: %acess_result%
+
++ Response 403 (application/json)
+
+    + Headers 
+
 
 ### Create a New Question [POST]
 
