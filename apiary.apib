@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://www.somi-d8.loc/
 
 # SmartOffice
 
@@ -9,16 +9,19 @@ SmartOffice API to interact with embedded devices.
 
 ### Request Access By UID For Node [GET]
 
+Embedded lock device may request access on pcd trigger. 
+UID, pcd_number and time should be returned same as the came, because of they used to invalidate events device-side.
+
 + Request (application/json)
 
     + Headers
 
             destination: %bo_name%
             action: access request
-            node_id: %id%
+            node-id: %id%
             time: %time%
             uid: %uid%
-            pcd_number: %pcd_number%
+            pcd-number: %pcd_number%
 
 + Response 200 (application/json)
 
@@ -26,10 +29,10 @@ SmartOffice API to interact with embedded devices.
 
             destination: %id%
             action: access request
-            node_id: %bo_name%
+            node-id: %bo_name%
             time: %time%
             uid: %uid%
-            pcd_number: %pcd_number%
+            pcd-number: %pcd_number%
             access: %acess_result%
 
 + Response 403 (application/json)
@@ -45,48 +48,40 @@ SmartOffice API to interact with embedded devices.
                 }
             }
 
-### Create a New Question [POST]
+## Access Request [/api/v1/node/time-sync]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Time Synchronizing [POST]
+
+Request called from device to sync local RTC with server.
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+    + Headers
 
-+ Response 201 (application/json)
+            destination: %bo_name%
+            action: time-sync
+            node-id: %id%
+            time: %time%
+
+
++ Response 200 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            destination: %id%
+            action: time sync
+            node-id: %bo_name%
+            time: %time%
+
++ Response 403 (application/json)
+
+    + Headers 
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "error": {
+                "message": "User is not authorized.",
+                "code": 0
+                }
             }
