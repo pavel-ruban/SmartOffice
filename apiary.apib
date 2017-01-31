@@ -3,35 +3,33 @@ HOST: http://polls.apiblueprint.org/
 
 # SmartOffice
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+SmartOffice API to interact with embedded devices.
 
-## Questions Collection [/questions]
+## Access Request [/api/v2/node/access]  /api/node/access (GET) /time-sync (POST) /event (POST) /call (POST)
 
-### List All Questions [GET]
+### Request Access By UID For Node [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            destination: %bo_name%
+            action: access request
+            node_id: %id%
+            time: %time%
+            uid: %uid%
+            pcd_number: %pcd_number%
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Java",
-                        "votes": 9000
-                    }
-                ]
-            }
-        ]
+    + Headers 
+
+            destination: %id%
+            action: access request
+            node_id: %bo_name%
+            time: %time%
+            uid: %uid%
+            pcd_number: %pcd_number%
 
 ### Create a New Question [POST]
 
