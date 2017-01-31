@@ -85,3 +85,48 @@ Request called from device to sync local RTC with server.
                 "code": 0
                 }
             }
+
+## Event Dumping [/api/v1/node/event]
+
+### Access Event Cache Dumping [POST]
+
+Embedded lock device may cache events in case of server/network problems.
+This request should sync events, and clear synced from embedded device build-in cache.
+UID, pcd_number and time should be returned same as the came, because of they used to invalidate events device-side.
+
++ Request (application/json)
+
+    + Headers
+
+            destination: %bo_name%
+            action: event dump
+            node-id: %id%
+            time: %time%
+            uid: %uid%
+            pcd-number: %pcd_number%
+            access-result: %access_result%
+            cache-status: %cache_status%
+
++ Response 200 (application/json)
+
+    + Headers 
+
+            destination: %id%
+            action: event dump
+            node-id: %bo_name%
+            time: %time%
+            uid: %uid%
+            pcd-number: %pcd_number%
+
++ Response 403 (application/json)
+
+    + Headers 
+
+    + Body
+
+            {
+                "error": {
+                "message": "User is not authorized.",
+                "code": 0
+                }
+            }
