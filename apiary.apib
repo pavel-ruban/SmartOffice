@@ -48,11 +48,11 @@ UID, pcd_number and time should be returned same as the came, because of they us
                 }
             }
 
-## Time Synchronizing [/api/v1/node/time-sync]
+## Time Synchronization [/api/v1/node/time-sync]
 
-### Time Synchronizing For Node [POST]
+### Time Synchronization For Node [POST]
 
-Request called from device to sync local RTC with server.
+Node (PCD) issues request to sync local ticks with server's timestamp.
 
 + Request (application/json)
 
@@ -86,13 +86,13 @@ Request called from device to sync local RTC with server.
                 }
             }
 
-## Event Dumping [/api/v1/node/event]
+## Event Synchronization [/api/v1/node/event]
 
-### Access Event Cache Dumping [POST]
+### Node Events Synchronization (Cache related logic) [POST]
 
-Embedded lock device may cache events in case of server/network problems.
-This request should sync events, and clear synced from embedded device build-in cache.
-UID, pcd_number and time should be returned same as the came, because of they used to invalidate events device-side.
+Embedded lock device caches events (usecase - avoid stuck in case of server/network problems).
+This request should sync events, and clear synced ones from embedded device build-in cache.
+UID, pcd_number and time should be returned same as the came, because of they used to invalidate device-side events.
 
 + Request (application/json)
 
